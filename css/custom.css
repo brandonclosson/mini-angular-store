@@ -1,0 +1,24 @@
+.some-top-margin {
+  margin-top: 6px;
+}
+
+.some-top-padding {
+  margin-top: 6px;
+}
+
+.well {
+  background-color: #E6DACE;
+}
+
+.checkingValid {
+  border-color: #ccc;
+}
+
+.checkingValid.ng-invalid.ng-dirty {
+  border-color: red;
+}
+
+.checkingValid.ng-valid.ng-dirty {
+  border-color: green;
+}
+
