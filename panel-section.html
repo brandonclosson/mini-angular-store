@@ -1,0 +1,68 @@
+<section>
+        <ul class="nav nav-pills">
+          <li ng-class="{active:panel.isSet(1)}">
+            <a href ng-click="panel.setTab(1)">Description</a></li>
+          <li ng-class="{active:panel.isSet(2)}">
+            <a href ng-click="panel.setTab(2)">Specifications</a></li>
+          <li ng-class="{active:panel.isSet(3)}">
+            <a href ng-click="panel.setTab(3)">Reviews</a></li>
+        </ul>
+        <!-- Description panel -->
+        <div class="panel panel-default text-left some-top-margin" ng-show="panel.isSet(1)">
+          <div class="panel-heading"><h4>Description</h4></div>
+          <div class="panel-body">
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+        <!-- Specs panel -->
+        <div class="panel panel-default text-left some-top-margin" ng-show="panel.isSet(2)">
+          <div class="panel-heading"><h4>Specifications</h4></div>
+          <div class="panel-body"><em>None yet.</em></div>
+        </div>
+        <div class="panel panel-default text-left some-top-margin" ng-show="panel.isSet(3)">
+          <div class="panel-heading"><h4>Reviews</h4></div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li ng-repeat="review in product.reviews">
+                <blockquote>
+                  <strong>{{review.stars}}/5 Stars</strong>
+                  {{review.body}}
+                  <cite class="clearfix">
+                    <em class="pull-right">
+                      -{{review.author}} on {{review.createdOn | date:'MM/dd/yyyy @ h:mma'}}
+                    </em>
+                  </cite>
+                </blockquote>
+              </li>
+            </ul>
+            <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)" novalidate>
+
+              <blockquote>
+                <strong>{{reviewCtrl.review.stars}}/5 Stars</strong>
+                {{reviewCtrl.review.body}}
+                <cite class="clearfix">
+                  <em class="pull-right">-{{reviewCtrl.review.author}}</em>
+                </cite>
+              </blockquote>
+
+              <fieldset class="form-group">
+                <select class="form-control" ng-model="reviewCtrl.review.stars" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
+                  <option value>Rate the Product</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a review of {{product.name}}..." title="Review"></textarea>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input type="email" ng-model="reviewCtrl.review.author" class="form-control checkingValid" placeholder="example@website.org" required/>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-warning pull-right" value="Submit Review" />
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </section>

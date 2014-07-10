@@ -49,10 +49,22 @@
     }
   ];
 
-  app.directive('reviewForm', function() {
+  app.directive('panelSection', function() {
     return {
-      restrict: 'AE',
-      templateUrl: 'review-form.html'
+      restrict: 'E',
+      templateUrl: 'panel-section.html',
+      controller: function() {
+        this.tab = 1;
+
+        this.setTab = function(selectedTab) {
+          this.tab = selectedTab;
+        };
+
+        this.isSet = function(checkedTab) {
+          return this.tab === checkedTab;
+        };
+      },
+      controllerAs: 'panel'
     };
   });
 
